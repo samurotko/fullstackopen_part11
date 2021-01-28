@@ -17,6 +17,6 @@ jobs:
         - name: npm install
           run: npm install
         - name: lint
-          run: npm "eslint \"**/*.{js,jsx}\""
+          run: npm run eslint
         - name: npm test
           run: npm run test
