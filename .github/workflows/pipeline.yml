@@ -17,7 +17,7 @@ jobs:
         - name: npm install
           run: npm install
         - name: dir
-          run: pwd ls -R
+          run: ls -R
         - name: lint
           run: npm run eslint
         - name: npm test
