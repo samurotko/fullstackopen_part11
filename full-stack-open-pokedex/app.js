@@ -16,5 +16,5 @@ app.get('/version', (req, res) => {
 })
 
 app.listen(server_port, () => {
-  console.log('server started on port', PORT)
+  console.log('server started on port', server_port)
 })
