@@ -33,6 +33,9 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:5000
+        - name: dev debendencies
+          working-directory: './full-stack-open-pokedex'
+          run: npm run heroku-prebuild
         - name: heroku deploy
           uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
           with:
@@ -40,3 +43,5 @@ jobs:
             heroku_api_key: ${{secrets.POKEDEX_API_KEY}}
             heroku_app_name: "pokedex-samu" #Must be unique in Heroku
             heroku_email: "samu.rotko@gmail.com"
+            healthcheck: "https://pokedex-samu.herokuapp.com/health"
+            checkstring: "ok"
