@@ -17,12 +17,12 @@ jobs:
         - name: npm install
           working-directory: './full-stack-open-pokedex'
           run: npm install
-        - name: cd
-          run: cd full-stack-open-pokedex
-        - name: dir
-          run: ls 
         - name: lint
           working-directory: './full-stack-open-pokedex'
           run: npm run eslint
+        - name: build
+          working-directory: './full-stack-open-pokedex'
+          run: npm run build
         - name: npm test
+          working-directory: './full-stack-open-pokedex'
           run: npm run test
