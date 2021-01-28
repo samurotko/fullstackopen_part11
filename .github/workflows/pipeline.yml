@@ -20,8 +20,9 @@ jobs:
         - name: cd
           run: cd full-stack-open-pokedex
         - name: dir
-          run: ls -R
+          run: ls 
         - name: lint
+          working-directory: './full-stack-open-pokedex'
           run: npm run eslint
         - name: npm test
           run: npm run test
