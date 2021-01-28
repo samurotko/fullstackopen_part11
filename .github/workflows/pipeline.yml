@@ -16,6 +16,8 @@ jobs:
              node-version: '12.x'
         - name: npm install
           run: npm install
+        - name: cd
+          run: cd full-stack-open-pokedex
         - name: dir
           run: ls -R
         - name: lint
