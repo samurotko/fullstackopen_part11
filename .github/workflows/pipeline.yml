@@ -15,6 +15,7 @@ jobs:
           with:
              node-version: '12.x'
         - name: npm install
+          working-directory: './full-stack-open-pokedex'
           run: npm install
         - name: cd
           run: cd full-stack-open-pokedex
