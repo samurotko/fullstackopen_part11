@@ -31,7 +31,7 @@ jobs:
           with:
             working-directory: './full-stack-open-pokedex'
             command: npm run test:e2e
-            start: npm run start-prod
+            start: npm run start
             wait-on: http://localhost:5000
         - name: heroku deploy
           uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
