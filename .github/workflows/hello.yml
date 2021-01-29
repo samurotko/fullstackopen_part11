@@ -16,21 +16,4 @@ jobs:
       run: date  
     - name: Directory content
       run: ls -l
-  a_test_job:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: gihub context
-        if: contains( join( toJson(github.event.commits.*.message) ), 'test') 
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ contains( join( toJson(github.event.commits.*.message) ), 'test')  }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        if: ${{ contains( join( toJson(github.event.commits.*.message) ), 'test')  }}
-        env:
-          COMMIT_MESSAGES: toJson(github.event.commits.*.message)
-        run: echo "$COMMIT_MESSAGES"
+  
