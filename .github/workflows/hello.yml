@@ -16,4 +16,6 @@ jobs:
       run: date  
     - name: Directory content
       run: ls -l
+    - name: true test
+      run: ${{ github.event_name == 'push' }} && !(contains( join( toJson(github.event.commits.*.message) ), '#skip') )
   
