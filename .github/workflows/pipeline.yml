@@ -49,7 +49,7 @@ jobs:
             rollbackonhealthcheckfailed: true
         - uses: actions/checkout@v2
         - name: Bump version and push tag
-          if: ${{ github.event_name == 'push' }}
+          if: ${{ github.event_name == 'push' }} && {{ $COMMIT_MESSAGES.env.
           uses: anothrNick/github-tag-action@1.33.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
@@ -68,5 +68,5 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message).contains(#skip) }}
         run: echo "$COMMIT_MESSAGES"
