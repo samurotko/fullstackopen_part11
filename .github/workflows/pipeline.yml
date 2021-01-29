@@ -40,4 +40,6 @@ jobs:
             heroku_api_key: ${{secrets.POKEDEX_API_KEY}}
             heroku_app_name: "pokedex-samu" #Must be unique in Heroku
             heroku_email: "samu.rotko@gmail.com"
+            healthcheck: "https://[YOUR APP's NAME].herokuapp.com/health"
+            checkstring: "ok"
            
