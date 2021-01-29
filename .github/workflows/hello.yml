@@ -22,12 +22,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: gihub context
+        if: contains( join( toJson(github.event.commits.*.message) ), 'test') 
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
       - name: commits
         env:
-          COMMITS: ${{ toJson(github.event.commits) }}
+          COMMITS: ${{ contains( join( toJson(github.event.commits.*.message) ), 'test')  }}
         run: echo "$COMMITS"
       - name: commit messages
         if: ${{ contains( join( toJson(github.event.commits.*.message) ), 'test')  }}
