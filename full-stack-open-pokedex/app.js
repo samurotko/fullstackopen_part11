@@ -16,6 +16,7 @@ app.use(express.static('dist'))
 //   res.send('1') // change this string to ensure a new version deployed
 // })
 
-app.listen(server_port, server_host, () => {
-  console.log('server started on port:', server_port)
+app.listen(server_port, '0.0.0.0', () => {
+  console.log('server started on port:', process.env.PORT)
+  console.log('process',process.env)
 })
