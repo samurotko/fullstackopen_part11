@@ -15,7 +15,7 @@ app.get('/health', (req, res) => {
 app.get('/version', (req, res) => {
   res.send('1') // change this string to ensure a new version deployed
 })
-//server_host, 
+//server_host,
 
 app.listen(server_port, server_host,() => {
   console.log('server started on port:', process.env.PORT)
