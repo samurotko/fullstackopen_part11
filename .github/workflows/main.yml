@@ -12,5 +12,6 @@ jobs:
       runs-on: ubuntu-18.04
       steps:
         - name: test
-          run: ls
+          run: |
+            echo "Hello World!"
        
