@@ -1,6 +1,9 @@
 name: Periodic health check
 
 on:
+  push:
+    branches: [main]
+    
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '*/2 * * * *'
@@ -12,6 +15,5 @@ jobs:
       runs-on: ubuntu-18.04
       steps:
         - name: test
-          run: |
-            echo "Hello World!"
+          run: echo "Hello World!"
        
