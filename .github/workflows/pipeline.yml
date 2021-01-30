@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
     types: [opened, synchronize]
     
   workflow_dispatch:
@@ -37,6 +37,7 @@ jobs:
             start: npm run start
             wait-on: http://localhost:5000
         - name: heroku deploy
+          if: ${{ github.event_name == 'push' && !(contains( join( toJson(github.event.commits.*.message) ), '#skip')) }}
           uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
           with:
             appdir: "full-stack-open-pokedex"
@@ -46,3 +47,35 @@ jobs:
             healthcheck: "https://pokedex-samu.herokuapp.com/health"
             checkstring: "ok"
             rollbackonhealthcheckfailed: true
+        - uses: actions/checkout@v2
+        - name: Bump version and push tag
+          if: ${{ github.event_name == 'push' && !(contains( join( toJson(github.event.commits.*.message) ), '#skip')) }}
+          uses: anothrNick/github-tag-action@1.33.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+            DEFAULT_BUMP: patch
+        - name: success message
+          if: ${{ success() }}
+          uses: 8398a7/action-slack@v3.8.3
+          with:
+            status: custom
+            fields: commit,author,took
+            custom_payload: |
+              {
+                attachments: [{
+                  color: good
+                  text: `a new version deployed to https://pokedex-samu.herokuapp.com/ (${process.env.AS_COMMIT}) /n by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
+                }]
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        - name: failure message
+          if: ${{ failure() }}
+          uses: 8398a7/action-slack@v3.8.3
+          with:
+            status: ${{ job.status }}
+            fields: repo,message,commit,author,took
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        
+  
