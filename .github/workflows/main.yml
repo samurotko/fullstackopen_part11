@@ -11,6 +11,8 @@ jobs:
   health check:
       runs-on: ubuntu-18.04
       steps:
+        - name: test
+          run: ls
         - name:  url-health-check
           uses: jtalk/url-health-check-action@v1.2
           with:
