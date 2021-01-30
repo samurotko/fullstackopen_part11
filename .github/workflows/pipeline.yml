@@ -55,5 +55,31 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
             DEFAULT_BUMP: patch
             RELEASE_BRANCHES: main
+        - name: success message
+          if: ${{ success() }}
+          uses: 8398a7/action-slack@v3.8.3
+          with:
+            status: custom
+            fields: commit,author,took
+            custom_payload: |
+              {
+                attachments: [{
+                  color: 'good',
+                  text: `a new version deployed to https://pokedex-samu.herokuapp.com/ (${process.env.AS_COMMIT}) \n by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
+                }]
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        - name: failure message
+          if: ${{ failure() }}
+          uses: 8398a7/action-slack@v3.8.3
+          with:
+            status: ${{ job.status }}
+            fields: repo,message,commit,author,took
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        
+  
+  
         
        
