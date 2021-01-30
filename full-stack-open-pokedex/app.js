@@ -20,4 +20,5 @@ app.get('/version', (req, res) => {
 app.listen(server_port, server_host,() => {
   console.log('server started on port', server_port)
   console.log('process',process.env)
+  console.log('testing slack')
 })
