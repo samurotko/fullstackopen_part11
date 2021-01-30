@@ -13,10 +13,12 @@ on:
   workflow_dispatch:
      
 jobs:
-  hello_world_job:
+  health:
     runs-on: ubuntu-latest
     steps:
-    - name: Say hello
-      run:  echo "Hello World!"
-
+    - name: ping
+      uses: jtalk/url-health-check-action@v1.2
+      with:
+          # Check the following URLs one by one sequentially
+        url: https://pokedex-samu.herokuapp.com/
        
