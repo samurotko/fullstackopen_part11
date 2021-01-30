@@ -1,19 +1,22 @@
 name: Periodic health check
 
+    
+  #schedule:
+    # * is a special character in YAML so you have to quote this string
+    #- cron:  '*/2 * * * *'
+    
+
 on:
   push:
-    branches: [main]
-    
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '*/2 * * * *'
-    
-  workflow_dispatch:
+    branches:  [ main ]
 
+  workflow_dispatch:
+     
 jobs:
-  health check:
-      runs-on: ubuntu-18.04
-      steps:
-        - name: test
-          run: echo "Hello World!"
+  hello_world_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Say hello
+      run:  echo "Hello World!"
+
        
